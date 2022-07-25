@@ -5,7 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +32,27 @@ public class UserTaskController {
 		return tsk;
 	}
 	
+	@PostMapping("/add-all-task")
+	public List<Task> addAllTask(@RequestBody List<Task> tasks){
+		return service.saveAllTask(tasks);
+	}
+	
 	@GetMapping("/get-all-task")
 	public List<Task> getAllTasks(){
 		List<Task> tasks = service.getAllTasks();
 		return tasks;
 	}
+	
+	@GetMapping("/{id}")
+	public Task getTaskById(@PathVariable(name = "id") Long taskId) {
+		return service.getTaskById(taskId);
+	}
+	
+	@DeleteMapping("/{id}")
+	public String deleteTask(@PathVariable(name = "id") Long taskId) {
+		service.delete(taskId);
+		return "Task "+taskId+" has been deleted.";
+	}
+	
 
 }

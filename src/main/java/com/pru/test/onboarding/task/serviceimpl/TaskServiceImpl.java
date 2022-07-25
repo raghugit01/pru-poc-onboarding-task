@@ -39,4 +39,9 @@ public class TaskServiceImpl implements TaskService {
 		return tasks;
 	}
 
+	@Override
+	public void delete(Long taskId) {
+		taskRepo.deleteById(taskId);
+	}
+
 }
