@@ -2,17 +2,17 @@ package com.pru.test.onboarding.task.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 
 import com.pru.test.onboarding.task.entity.Task;
-@Component
+import com.pru.test.onboarding.task.exception.TaskNotFoudException;
+
 public interface TaskService {
 	
 	public Task saveTask(Task task);
 	
 	public List<Task> saveAllTask(List<Task> tasks);
 	
-	public Task getTaskById(Long Id);
+	public Task getTaskById(Long Id) throws TaskNotFoudException;
 	
 	public List<Task> getAllTasks();
 	

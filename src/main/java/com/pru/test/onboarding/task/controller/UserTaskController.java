@@ -2,6 +2,8 @@ package com.pru.test.onboarding.task.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pru.test.onboarding.task.entity.Task;
+import com.pru.test.onboarding.task.exception.TaskNotFoudException;
 import com.pru.test.onboarding.task.service.TaskService;
 
 @RestController
@@ -44,15 +47,20 @@ public class UserTaskController {
 	}
 	
 	@GetMapping("/{id}")
-	public Task getTaskById(@PathVariable(name = "id") Long taskId) {
-		return service.getTaskById(taskId);
+	public Task getTaskById(@PathVariable(name = "id") Long taskId) throws TaskNotFoudException {		
+		Task task=null;	
+		try {
+			task=service.getTaskById(taskId);	
+		} catch (EntityNotFoundException e) {
+			throw new TaskNotFoudException(e.getMessage());
+		}
+		return task;
 	}
 	
 	@DeleteMapping("/{id}")
 	public String deleteTask(@PathVariable(name = "id") Long taskId) {
 		service.delete(taskId);
 		return "Task "+taskId+" has been deleted.";
-	}
-	
+	}	
 
 }

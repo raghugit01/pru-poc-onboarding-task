@@ -2,6 +2,10 @@ package com.pru.test.onboarding.task.serviceimpl;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,8 @@ public class TaskServiceImpl implements TaskService {
 	
 	@Autowired
 	private TaskRepo taskRepo;
+	
+	private Logger logger=LoggerFactory.getLogger(TaskServiceImpl.class);
 
 	@Override
 	public Task saveTask(Task task) {
@@ -28,8 +34,9 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task getTaskById(Long Id) {
+	public Task getTaskById(Long Id) throws EntityNotFoundException {
 		Task task = taskRepo.getReferenceById(Id);
+		logger.info(""+task);
 		return task;
 	}
 
