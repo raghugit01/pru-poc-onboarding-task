@@ -21,7 +21,7 @@ public class OnBoardingChecklist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long checkListId;
-	private String uestions;
+	private String questions;
 	private String status;
 	private String comment;
 	
