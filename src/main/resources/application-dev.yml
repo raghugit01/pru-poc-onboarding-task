@@ -10,9 +10,9 @@ spring:
       hibernate:
        dialect = org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:49153/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
-    password: postgrespw
+    password: admin
     driverClassName: org.postgresql.Driver
   application:
     name: Onboarding-Task
