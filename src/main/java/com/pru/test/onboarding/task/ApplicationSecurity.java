@@ -30,10 +30,6 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 //				.orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found.")));
 	}
 
-//	@Bean
-//	public PasswordEncoder passwordEncoder() {
-//		return new BCryptPasswordEncoder();
-//	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
