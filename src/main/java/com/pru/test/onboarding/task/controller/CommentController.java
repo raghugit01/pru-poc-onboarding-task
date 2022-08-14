@@ -23,15 +23,14 @@ public class CommentController {
 	private CommentService service;
 	
 	@GetMapping("/{id}")
-	public Comment getCommentByID(@PathVariable(name = "id") String id){
-		Comment comment= service.getCommentByEmpId(id);
+	public List<Comment> getCommentByID(@PathVariable(name = "id") String id){
+		List<Comment> comment= service.getCommentByEmpId(id);
 		return comment;
 	}
 	
 	@PostMapping("/add-comment")
 	public Comment saveOrUpdateCommentByID(@RequestBody Comment newComment){
-		Comment comment= service.saveOrUpdateCommentByEmpId(newComment);
+		Comment comment= service.insertComment(newComment);
 		return comment;
 	}
-
 }

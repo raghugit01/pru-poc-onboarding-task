@@ -1,5 +1,7 @@
 package com.pru.test.onboarding.task.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +16,13 @@ public class CommentServiceImpl implements CommentService {
 	private CommentRepo commentRepo;
 
 	@Override
-	public Comment getCommentByEmpId(String empId) {
-		if(commentRepo.findById(empId).isPresent())
-			return commentRepo.getReferenceById(empId);
-		else
-			return null;
+	public Comment insertComment(Comment comment) {
+		return commentRepo.save(comment);
 	}
 
 	@Override
-	public Comment saveOrUpdateCommentByEmpId(Comment comment) {
-		return commentRepo.save(comment);
-
+	public List<Comment> getCommentByEmpId(String empId) {
+		return commentRepo.getCommentByEmpId(empId);
 	}
 
 }
