@@ -24,11 +24,18 @@ public class JwtTokenUtilService {
 	
 	@Autowired
 	private DiscoveryClient discoveryClient;
+	
+	private String getUrl(){
+		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
+		 String url="http://"+os.get().toUpperCase();
+		 return url;
+	}
 
 	public AuthResponse getAccessToken(AuthRequest aurq) throws JsonProcessingException {
-		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
-		String url="http://"+os.get().toUpperCase();
-		URI lk = URI.create(url+"/auth/login");
+//		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
+//		String url="http://"+os.get().toUpperCase();
+		System.out.println("38 url getAccessToken "+getUrl());
+		URI lk = URI.create(getUrl()+"/auth/login");
 		HttpHeaders headers=new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<AuthRequest> entity=new HttpEntity<AuthRequest>(aurq,headers);
@@ -37,9 +44,10 @@ public class JwtTokenUtilService {
 	}
 	
 	public boolean validateToken(String token) {
-		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
-		String url="http://"+os.get().toUpperCase();
-		URI uri=URI.create(url+"/token/validate-token");
+//		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
+//		String url="http://"+os.get().toUpperCase();
+		System.out.println("50 url validateToken "+getUrl());
+		URI uri=URI.create(getUrl()+"/token/validate-token");
 		HttpHeaders headers=new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> entity=new HttpEntity<String>(token.trim(), headers);
@@ -48,9 +56,10 @@ public class JwtTokenUtilService {
 	}
 	
 	public User getUserDetails(String token){
-		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
-		String url="http://"+os.get().toUpperCase();
-		URI uri=URI.create(url+"/token/get-claim");
+//		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
+//		String url="http://"+os.get().toUpperCase();
+		System.out.println("62 url getUserDetails "+getUrl());
+		URI uri=URI.create(getUrl()+"/token/get-claim");
 		HttpHeaders headers=new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> entity=new HttpEntity<String>(token.trim(), headers);

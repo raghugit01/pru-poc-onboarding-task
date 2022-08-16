@@ -2,8 +2,6 @@ package com.pru.test.onboarding.task.controller;
 
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,12 +46,8 @@ public class UserTaskController {
 	
 	@GetMapping("/{id}")
 	public Task getTaskById(@PathVariable(name = "id") Long taskId) throws TaskNotFoudException {		
-		Task task=null;	
-		try {
-			task=service.getTaskById(taskId);	
-		} catch (EntityNotFoundException e) {
-			throw new TaskNotFoudException(e.getMessage());
-		}
+		Task task=null;
+		task=service.getTaskById(taskId);
 		return task;
 	}
 	
