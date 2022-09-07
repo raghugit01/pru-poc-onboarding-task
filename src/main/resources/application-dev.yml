@@ -2,23 +2,16 @@ server:
   port: 9094
   
 spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-       dialect = org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: admin
-    driverClassName: org.postgresql.Driver
   application:
     name: Onboarding-Task
   config:
         activate:
             on-profile: dev
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mydb
 
 eureka:
   instance:
@@ -45,4 +38,16 @@ eureka:
 #  instance:
 #    hostname: localhost
    
+#jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#       dialect = org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: admin
+#    driverClassName: org.postgresql.Driver
   

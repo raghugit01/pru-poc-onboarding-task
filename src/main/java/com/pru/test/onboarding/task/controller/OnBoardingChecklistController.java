@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class OnBoardingChecklistController {
 	private OnBoardingChecklistService service;
 	
 	
-	@RolesAllowed("ROLE_ONBOARDING_MANAGER")
+	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@PostMapping(path = "/add-onboarding-checklist",consumes = "application/json")
 	public OnBoardingChecklist addOnBoarding(@RequestBody OnBoardingChecklist checklist) {
 		OnBoardingChecklist boardingChecklist  = service.saveOnBoardingChecklist(checklist);
@@ -33,13 +34,12 @@ public class OnBoardingChecklistController {
 	}
 	
 	@PostMapping("/add-all-onboarding-checklist")
-	@RolesAllowed("ROLE_ONBOARDING_REVIEWER")
+	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	public List<OnBoardingChecklist> addAllOnBoarding(@RequestBody List<OnBoardingChecklist> checklists){
 		return service.saveAllOnBoardingChecklist(checklists);
 	}
-	
-	
-	@RolesAllowed({"ROLE_ONBOARDING_REVIEWER","ROLE_ASSOCIATE","ROLE_ONBOARDING_MANAGER"})
+		
+	@PreAuthorize("hasAnyRole({'ROLE_ASSOCIATE','ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@GetMapping("/get-all-onboarding-checklist")
 	public List<OnBoardingChecklist> getAllOnBoarding(){
 		List<OnBoardingChecklist> boardingChecklists= service.getAllOnBoardingChecklist();
@@ -47,7 +47,7 @@ public class OnBoardingChecklistController {
 	}
 	
 	
-	@RolesAllowed({"ROLE_ONBOARDING_REVIEWER","ROLE_ASSOCIATE"})
+	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@GetMapping("/{id}")
 	public OnBoardingChecklist getOnBoardingById(@PathVariable(name = "id") Long id) {
 		OnBoardingChecklist boardingChecklist=null;
@@ -56,7 +56,7 @@ public class OnBoardingChecklistController {
 	}
 	
 	@DeleteMapping("/{id}")
-	@RolesAllowed({"ROLE_ONBOARDING_REVIEWER","ROLE_ASSOCIATE"})
+	@PreAuthorize("hasRole('ROLE_ONBOARDING_MANAGER')")
 	public String deleteOnBoarding(@PathVariable(name = "id") Long id) {
 		service.deleteOnBoardingChecklist(id);
 		return "Task "+id+" has been deleted.";

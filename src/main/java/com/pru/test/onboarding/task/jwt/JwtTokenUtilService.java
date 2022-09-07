@@ -24,11 +24,15 @@ public class JwtTokenUtilService {
 	
 	@Autowired
 	private DiscoveryClient discoveryClient;
+	
+	private String getUrl(){
+		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
+		 String url="http://"+os.get().toUpperCase();
+		 return url;
+	}
 
 	public AuthResponse getAccessToken(AuthRequest aurq) throws JsonProcessingException {
-		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
-		String url="http://"+os.get().toUpperCase();
-		URI lk = URI.create(url+"/auth/login");
+		URI lk = URI.create(getUrl()+"/auth/login");
 		HttpHeaders headers=new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<AuthRequest> entity=new HttpEntity<AuthRequest>(aurq,headers);
@@ -37,9 +41,7 @@ public class JwtTokenUtilService {
 	}
 	
 	public boolean validateToken(String token) {
-		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
-		String url="http://"+os.get().toUpperCase();
-		URI uri=URI.create(url+"/token/validate-token");
+		URI uri=URI.create(getUrl()+"/token/validate-token");
 		HttpHeaders headers=new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> entity=new HttpEntity<String>(token.trim(), headers);
@@ -48,9 +50,7 @@ public class JwtTokenUtilService {
 	}
 	
 	public User getUserDetails(String token){
-		Optional<String> os = this.discoveryClient.getServices().stream().filter(s->s.startsWith("token")).findFirst();
-		String url="http://"+os.get().toUpperCase();
-		URI uri=URI.create(url+"/token/get-claim");
+		URI uri=URI.create(getUrl()+"/token/get-claim");
 		HttpHeaders headers=new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> entity=new HttpEntity<String>(token.trim(), headers);

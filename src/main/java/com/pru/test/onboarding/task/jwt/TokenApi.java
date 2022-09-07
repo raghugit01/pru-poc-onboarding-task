@@ -23,5 +23,4 @@ public class TokenApi {
 		return service.getAccessToken(request);
 	}
 	
-
 }
