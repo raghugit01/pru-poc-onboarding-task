@@ -63,7 +63,7 @@ public class JwtTokenUtilService {
 			if(key.equalsIgnoreCase("sub")) {
 				String s1=(String)val;
 				String[] jwtSubject = s1.split(",");
-				userDetails.setId(Integer.parseInt(jwtSubject[0]));
+				userDetails.setId(jwtSubject[0]);
 				userDetails.setEmail(jwtSubject[1]);
 			}
 			if(key.equalsIgnoreCase("roles")) {

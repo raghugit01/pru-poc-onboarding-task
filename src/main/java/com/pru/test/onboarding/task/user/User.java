@@ -14,7 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class User implements UserDetails {
-	private Integer id;
+	private String id;
 	
 	@Email @Length(min = 5, max = 50)
 	private String email;
@@ -31,11 +31,11 @@ public class User implements UserDetails {
 		this.password = password;
 	}
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
