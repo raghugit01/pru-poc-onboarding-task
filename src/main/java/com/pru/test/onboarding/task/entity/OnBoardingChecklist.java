@@ -1,11 +1,10 @@
 package com.pru.test.onboarding.task.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,13 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-@Table(name = "tbl_onBoarding_checklist")
+@Document(collection = "onboardingchecklists")
 public class OnBoardingChecklist {
 
 	@NotNull
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long checkListId;
 	private String questions;
 	private String status;

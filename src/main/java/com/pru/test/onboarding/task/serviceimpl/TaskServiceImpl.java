@@ -1,8 +1,7 @@
 package com.pru.test.onboarding.task.serviceimpl;
 
 import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,10 +33,10 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task getTaskById(Long Id) throws EntityNotFoundException {
-		Task task = taskRepo.getReferenceById(Id);
+	public Task getTaskById(Long Id) {
+		Optional<Task> task = taskRepo.findById(Id);
 		logger.info(""+task);
-		return task;
+		return task.get();
 	}
 
 	@Override

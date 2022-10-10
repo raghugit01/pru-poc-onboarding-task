@@ -2,13 +2,11 @@ package com.pru.test.onboarding.task.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -19,13 +17,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
-@Table(name = "tbl_task_details")
+@Document(collection = "taskdetails")
 public class Task {
 
 	@NotNull
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long taskId;
 	@NotBlank(message = "task name cant be empty")
 	private String taskName;

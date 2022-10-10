@@ -2,23 +2,25 @@ server:
   port: 9094
   
 spring:
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-       dialect = org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: admin
-    driverClassName: org.postgresql.Driver
   application:
     name: Onboarding-Task
   config:
         activate:
             on-profile: dev
+  data:
+    mongodb:
+      uri: mongodb+srv://root:WBJsDZphl9loQGt4@mongodb.lqmn4.mongodb.net/onboarding-prudential?retryWrites=true&w=majority
+
+eureka:
+  instance:
+    hostname: ${vcap.application.uris[0]:localhost}
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 20
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      
 #  zipkin:
 #    base-url: http://127.0.0.1:9411/
     
@@ -34,4 +36,16 @@ spring:
 #  instance:
 #    hostname: localhost
    
+#jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#    properties:
+#      hibernate:
+#       dialect = org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/postgres
+#    username: postgres
+#    password: admin
+#    driverClassName: org.postgresql.Driver
   

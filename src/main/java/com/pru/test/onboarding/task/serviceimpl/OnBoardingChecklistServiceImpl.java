@@ -1,6 +1,7 @@
 package com.pru.test.onboarding.task.serviceimpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,8 @@ public class OnBoardingChecklistServiceImpl implements OnBoardingChecklistServic
 
 	@Override
 	public OnBoardingChecklist getOnBoardingChecklistById(Long Id) {
-		return checklistRepo.getReferenceById(Id);
+		Optional<OnBoardingChecklist> on=checklistRepo.findById(Id);
+		return on.get();
 	}
 
 	@Override
