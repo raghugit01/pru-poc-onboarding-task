@@ -1,0 +1,70 @@
+package com.pru.test.onboarding.task.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pru.test.onboarding.task.entity.Training;
+import com.pru.test.onboarding.task.service.TrainingService;
+
+@RestController
+@RequestMapping("/training")
+public class TrainingController {
+	
+	@Autowired
+	private TrainingService service;
+
+	@PostMapping("/add-training")
+	public Training addTraining(@RequestBody Training training) {
+		Training trng = service.saveTraining(training);
+		return trng;
+	}
+	
+	@PutMapping(path ="/{id}")
+	public ResponseEntity<?> updateTraining(@RequestBody Training training, @PathVariable("id") Integer trainingId) {
+		Training updatedTraining = null;
+		try {
+			updatedTraining = service.updateTraining(training, trainingId);
+			if(updatedTraining == null) {
+				return new ResponseEntity<>("Training not found", HttpStatus.NOT_FOUND);
+			}
+			else {
+				return new ResponseEntity<>(updatedTraining, HttpStatus.OK);
+				
+			}
+		}
+		catch(Exception e) {
+			return new ResponseEntity<>("Training not found", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@GetMapping("/get-all-training")
+	public List<Training> getAllTraining(){
+		List<Training> trainings = service.getAllTraining();
+		return trainings;
+	}
+	
+	@GetMapping("/{trainingId}")
+	public Training getTrainingById(@PathVariable("trainingId") Integer trainingId) {
+		Training trng=null;
+		trng=service.getTrainingById(trainingId);	
+		return trng;
+	}
+	
+	@DeleteMapping("/{trainingId}")
+	public String deleteTraining(@PathVariable("trainingId") Integer trainingId) {
+		service.deleteTraining(trainingId);
+		return "Training "+trainingId+" has been deleted.";
+	}
+
+}
