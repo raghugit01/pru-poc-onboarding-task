@@ -22,7 +22,7 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public List<Comment> getCommentByEmpId(String empId) {
-		return commentRepo.getCommentByEmpId(empId);
+		return commentRepo.findByEmpIdOrderByDateDesc(empId);
 	}
 
 }
