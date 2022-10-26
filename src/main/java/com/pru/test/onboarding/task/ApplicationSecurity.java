@@ -22,6 +22,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.pru.test.onboarding.task.jwt.JwtTokenFilter;
 
+@SuppressWarnings("deprecation")
 @EnableWebSecurity(debug = true)
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
