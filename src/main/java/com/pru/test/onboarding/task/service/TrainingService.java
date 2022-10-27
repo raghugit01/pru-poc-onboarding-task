@@ -9,11 +9,11 @@ public interface TrainingService {
 
 	public Training saveTraining(Training training);
 
-	public Training updateTraining(Training training, Integer trainingId) throws TrainingNotFoundException;
+	public Training updateTraining(Training training, String trainingId) throws TrainingNotFoundException;
 
-	public Training getTrainingById(Integer Id) throws TrainingNotFoundException;
+	public Training getTrainingById(String Id) throws TrainingNotFoundException;
 
 	public List<Training> getAllTraining();
 
-	public void deleteTraining(Integer trainingId);
+	public void deleteTraining(String trainingId);
 }

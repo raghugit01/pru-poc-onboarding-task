@@ -1,7 +1,5 @@
 package com.pru.test.onboarding.task.entity;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -12,21 +10,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection = "tbl_training")
+@Document(collection = "training")
 public class Training {
 
-	@NotNull
 	@Id
-	private Integer trainingId;
+	private String trainingId;
 	private String trainingName;
 	private String link;
 	private String remarks;
 
-	public Integer getTrainingId() {
+	public String getTrainingId() {
 		return trainingId;
 	}
 
-	public void setTrainingId(Integer trainingId) {
+	public void setTrainingId(String trainingId) {
 		this.trainingId = trainingId;
 	}
 

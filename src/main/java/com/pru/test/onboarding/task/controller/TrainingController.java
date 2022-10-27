@@ -37,7 +37,7 @@ public class TrainingController {
 
 	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@PutMapping(path ="/{id}")
-	public ResponseEntity<?> updateTraining(@RequestBody Training training, @PathVariable("id") Integer trainingId) {
+	public ResponseEntity<?> updateTraining(@RequestBody Training training, @PathVariable("id") String trainingId) {
 		Training updatedTraining = null;
 		try {
 			updatedTraining = service.updateTraining(training, trainingId);
@@ -63,7 +63,7 @@ public class TrainingController {
 
 	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@GetMapping("/{trainingId}")
-	public Training getTrainingById(@PathVariable("trainingId") Integer trainingId) throws TrainingNotFoundException {
+	public Training getTrainingById(@PathVariable("trainingId") String trainingId) throws TrainingNotFoundException {
 		Training trng=null;
 		trng=service.getTrainingById(trainingId);	
 		return trng;
@@ -71,7 +71,7 @@ public class TrainingController {
 
 	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@DeleteMapping("/{trainingId}")
-	public String deleteTraining(@PathVariable("trainingId") Integer trainingId) {
+	public String deleteTraining(@PathVariable("trainingId") String trainingId) {
 		service.deleteTraining(trainingId);
 		return "Training "+trainingId+" has been deleted.";
 	}

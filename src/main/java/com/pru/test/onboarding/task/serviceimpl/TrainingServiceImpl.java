@@ -21,7 +21,7 @@ public class TrainingServiceImpl implements TrainingService{
 	}
 
 	@Override
-	public Training updateTraining(Training training, Integer trainingId) throws TrainingNotFoundException {
+	public Training updateTraining(Training training, String trainingId) throws TrainingNotFoundException {
 		Training trng = repo.findById(trainingId)
 		          .orElseThrow(() -> new TrainingNotFoundException("Training not found"));
 		trng.setTrainingName(training.getTrainingName());
@@ -33,7 +33,7 @@ public class TrainingServiceImpl implements TrainingService{
 	}
 
 	@Override
-	public Training getTrainingById(Integer trainingId) throws TrainingNotFoundException {
+	public Training getTrainingById(String trainingId) throws TrainingNotFoundException {
 		return repo.findById(trainingId)
 		          .orElseThrow(() -> new TrainingNotFoundException("Training not found"));
 	}
@@ -44,7 +44,7 @@ public class TrainingServiceImpl implements TrainingService{
 	}
 
 	@Override
-	public void deleteTraining(Integer trainingId) {
+	public void deleteTraining(String trainingId) {
 		repo.deleteById(trainingId);
 	}
 }
