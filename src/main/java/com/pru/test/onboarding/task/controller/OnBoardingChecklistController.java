@@ -46,7 +46,7 @@ public class OnBoardingChecklistController {
 	
 	@PreAuthorize("hasAnyRole({'ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@GetMapping("/{id}")
-	public OnBoardingChecklist getOnBoardingById(@PathVariable(name = "id") Long id) {
+	public OnBoardingChecklist getOnBoardingById(@PathVariable(name = "id") String id) {
 		OnBoardingChecklist boardingChecklist=null;
 		boardingChecklist=service.getOnBoardingChecklistById(id);
 		return boardingChecklist;
@@ -54,7 +54,7 @@ public class OnBoardingChecklistController {
 	
 	@DeleteMapping("/{id}")
 	@PreAuthorize("hasRole('ROLE_ONBOARDING_MANAGER')")
-	public String deleteOnBoarding(@PathVariable(name = "id") Long id) {
+	public String deleteOnBoarding(@PathVariable(name = "id") String id) {
 		service.deleteOnBoardingChecklist(id);
 		return "Task "+id+" has been deleted.";
 	}

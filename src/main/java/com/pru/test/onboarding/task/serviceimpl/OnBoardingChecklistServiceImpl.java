@@ -27,7 +27,7 @@ public class OnBoardingChecklistServiceImpl implements OnBoardingChecklistServic
 	}
 
 	@Override
-	public OnBoardingChecklist getOnBoardingChecklistById(Long Id) {
+	public OnBoardingChecklist getOnBoardingChecklistById(String Id) {
 		Optional<OnBoardingChecklist> on=checklistRepo.findById(Id);
 		return on.get();
 	}
@@ -38,7 +38,7 @@ public class OnBoardingChecklistServiceImpl implements OnBoardingChecklistServic
 	}
 
 	@Override
-	public void deleteOnBoardingChecklist(Long OnBoardingChecklistId) {
+	public void deleteOnBoardingChecklist(String OnBoardingChecklistId) {
 		checklistRepo.deleteById(OnBoardingChecklistId);
 	}
 

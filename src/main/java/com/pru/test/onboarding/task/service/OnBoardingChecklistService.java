@@ -9,10 +9,10 @@ public interface OnBoardingChecklistService {
 	
 	public List<OnBoardingChecklist> saveAllOnBoardingChecklist(List<OnBoardingChecklist> boardingChecklists);
 	
-	public OnBoardingChecklist getOnBoardingChecklistById(Long Id);
+	public OnBoardingChecklist getOnBoardingChecklistById(String Id);
 	
 	public List<OnBoardingChecklist> getAllOnBoardingChecklist();
 	
-	public void deleteOnBoardingChecklist(Long OnBoardingChecklistId);
+	public void deleteOnBoardingChecklist(String OnBoardingChecklistId);
 
 }
