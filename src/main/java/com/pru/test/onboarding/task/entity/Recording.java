@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Recording {
 
 	@Id
-	private String id;
+	private String recordId;
 	private String recordDesc;
 	private String recordLink;
 	private String recordLinkPassword;
