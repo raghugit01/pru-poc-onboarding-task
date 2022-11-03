@@ -2,8 +2,6 @@ package com.pru.test.onboarding.task.entity;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,9 +17,8 @@ import lombok.NoArgsConstructor;
 @Document(collection = "comment")
 public class Comment {
 
-	@NotNull
 	@Id
-	private Long commentId;
+	private String commentId;
 	private String empId;
 	private String comments;
 	@JsonFormat(pattern = "yyyy-MM-dd")
