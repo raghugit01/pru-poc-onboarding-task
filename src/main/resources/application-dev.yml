@@ -2,26 +2,28 @@ server:
   port: 9094
   
 spring:
-  application:
-    name: Onboarding-Task
-  config:
-        activate:
-            on-profile: dev
   data:
     mongodb:
       host: 10.5.0.7
       port: 27017
       database: mydb
+  application:
+    name: ONBOARDING-TASK
+  config:
+        activate:
+            on-profile: dev
+logging:
+  file.name: C:/Users/003EMS744/DriveSetup/logs/associate-service.log
 
-eureka:
-  instance:
-    hostname: ${vcap.application.uris[0]:10.5.0.5}
-    prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 20
-  client:
-    serviceUrl:
-      defaultZone: http://10.5.0.5:8761/eureka
+#eureka:
+#  instance:
+#    hostname: ${vcap.application.uris[0]:10.5.0.5}
+#    prefer-ip-address: true
+#    lease-renewal-interval-in-seconds: 10
+#    lease-expiration-duration-in-seconds: 20
+#  client:
+#    serviceUrl:
+#      defaultZone: http://10.5.0.5:8761/eureka
       
 #  zipkin:
 #    base-url: http://127.0.0.1:9411/
