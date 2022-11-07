@@ -12,18 +12,27 @@ spring:
   config:
         activate:
             on-profile: dev
-logging:
-  file.name: C:/Users/003EMS744/DriveSetup/logs/associate-service.log
+        import: optional:configserver:http://10.5.0.9:9296/
+#logging:
+#  file.name: C:/Users/003EMS744/DriveSetup/logs/associate-service.log
 
+management:
+  endpoint:
+    restart:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 #eureka:
 #  instance:
-#    hostname: ${vcap.application.uris[0]:10.5.0.5}
+#    hostname: ${vcap.application.uris[0]:localhost}
 #    prefer-ip-address: true
 #    lease-renewal-interval-in-seconds: 10
 #    lease-expiration-duration-in-seconds: 20
 #  client:
 #    serviceUrl:
-#      defaultZone: http://10.5.0.5:8761/eureka
+#      defaultZone: http://localhost:8761/eureka
       
 #  zipkin:
 #    base-url: http://127.0.0.1:9411/
