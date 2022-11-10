@@ -1,5 +1,6 @@
 #cmd : docker build -t onboarding-task-service .
-FROM openjdk:8
+FROM eclipse-temurin:8-jdk-alpine
 EXPOSE 9094
-ADD target/onboarding-task-service.jar onboarding-task-service.jar
+VOLUME /tmp
+COPY  target/*.jar onboarding-task-service.jar
 ENTRYPOINT ["java","-jar","/onboarding-task-service.jar"]
