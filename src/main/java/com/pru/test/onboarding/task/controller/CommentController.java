@@ -3,6 +3,7 @@ package com.pru.test.onboarding.task.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class CommentController {
 	
 	@Autowired
 	private CommentService service;
+	
+	@Value("${skill.service.url}")
+	private String skillServiceUrl;
 	
 	@PreAuthorize("hasAnyRole({'ROLE_ASSOCIATE','ROLE_ONBOARDING_REVIEWER','ROLE_ONBOARDING_MANAGER'})")
 	@GetMapping("/{id}")
