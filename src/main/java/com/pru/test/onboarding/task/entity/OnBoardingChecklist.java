@@ -69,4 +69,13 @@ public class OnBoardingChecklist {
 		this.linkName = linkName;
 	}
 
+	public OnBoardingChecklist(String questions, String status, String comment, String link, String linkName) {
+		super();
+		this.questions = questions;
+		this.status = status;
+		this.comment = comment;
+		this.link = link;
+		this.linkName = linkName;
+	}
+
 }
