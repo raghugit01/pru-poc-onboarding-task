@@ -21,7 +21,6 @@ public class Comment {
 	private String commentId;
 	private String empId;
 	private String comments;
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	private String who;
 	private String role;
